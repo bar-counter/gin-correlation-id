@@ -75,12 +75,12 @@ $ echo "go mod vendor"
 | windows  | amd64 | BenchmarkParallel_gin_correlation_id_snowflake-2  | 347394 | 3327 ns/op  | 2256 B/op | 31 allocs/op  | Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz |
 | windows  | amd64 | BenchmarkGinIdShortUuid-2                         | 95556  | 12331 ns/op | 4915 B/op | 129 allocs/op | Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz |
 | windows  | amd64 | BenchmarkParallelGinIdShortUuid-2                 | 153523 | 8331 ns/op  | 4915 B/op | 129 allocs/op | Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz |
-| darwin   | amd64 | Benchmark_gin_correlation_id_uuidv4-2             | 440373 | 2712 ns/op  | 2321 B/op | 32 allocs/op  | apple silicon M1 Max core 10                   |
-| darwin   | amd64 | BenchmarkParallel_gin_correlation_id_uuidv4-10    | 513122 | 2296 ns/op  | 2324 B/op | 32 allocs/op  | apple silicon M1 Max core 10                   |
-| darwin   | amd64 | Benchmark_gin_correlation_id_snowflake-2          | 570752 | 2095 ns/op  | 2257 B/op | 31 allocs/op  | apple silicon M1 Max core 10                   |
-| darwin   | amd64 | BenchmarkParallel_gin_correlation_id_snowflake-10 | 557127 | 2213 ns/op  | 2260 B/op | 31 allocs/op  | apple silicon M1 Max core 10                   |
-| darwin   | amd64 | BenchmarkGinIdShortUuid-2                         | 202786 | 5920 ns/op  | 4893 B/op | 128 allocs/op | apple silicon M1 Max core 10                   |
-| darwin   | amd64 | BenchmarkParallelGinIdShortUuid-10                | 330234 | 3614 ns/op  | 4898 B/op | 128 allocs/op | apple silicon M1 Max core 10                   |
+| darwin   | arm64 | Benchmark_gin_correlation_id_uuidv4-2             | 440373 | 2712 ns/op  | 2321 B/op | 32 allocs/op  | apple silicon M1 Max core 10                   |
+| darwin   | arm64 | BenchmarkParallel_gin_correlation_id_uuidv4-10    | 513122 | 2296 ns/op  | 2324 B/op | 32 allocs/op  | apple silicon M1 Max core 10                   |
+| darwin   | arm64 | Benchmark_gin_correlation_id_snowflake-2          | 570752 | 2095 ns/op  | 2257 B/op | 31 allocs/op  | apple silicon M1 Max core 10                   |
+| darwin   | arm64 | BenchmarkParallel_gin_correlation_id_snowflake-10 | 557127 | 2213 ns/op  | 2260 B/op | 31 allocs/op  | apple silicon M1 Max core 10                   |
+| darwin   | arm64 | BenchmarkGinIdShortUuid-2                         | 202786 | 5920 ns/op  | 4893 B/op | 128 allocs/op | apple silicon M1 Max core 10                   |
+| darwin   | arm64 | BenchmarkParallelGinIdShortUuid-10                | 330234 | 3614 ns/op  | 4898 B/op | 128 allocs/op | apple silicon M1 Max core 10                   |
 
 - `ns/op` is the average time per operation, lower latency better performance
 - `B/op` is the number of bytes allocated per operation, memory allocation means getting more memory from the operating system, less occupied better
