@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 const cliVersion = "0.1.2"
@@ -61,7 +62,11 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 }
 
 func ping(c *gin.Context) {
-	c.String(http.StatusOK, "pong as correlation ID: %s", gin_correlation_id_uuidv4.GetCorrelationID(c))
+	var b strings.Builder
+	b.Grow(0)
+	b.WriteString("pong as correlation ID: ")
+	b.WriteString(gin_correlation_id_uuidv4.GetCorrelationID(c))
+	c.String(http.StatusOK, b.String())
 }
 
 // Options is a middleware function that appends headers

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bar-counter/gin-correlation-id/gin_correlation_cors"
-	"github.com/bar-counter/gin-correlation-id/gin_correlation_id_uuidv4"
+	"github.com/bar-counter/gin-correlation-id/gin_correlation_id_shortuuid"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 	"net/http"
@@ -21,28 +21,28 @@ func performRequest(r http.Handler, method, path string) *httptest.ResponseRecor
 
 func ginPingJsonRouter(correlationKey string, isSupportCorsHeader bool) *gin.Engine {
 	gin_correlation_cors.SetIsSupportCorsHeader(isSupportCorsHeader)
-	gin_correlation_cors.SetCorrelationIDUuidV4Key(correlationKey)
+	gin_correlation_cors.SetCorrelationIDShortUuidKey(correlationKey)
 	router := gin.New()
-	router.Use(gin_correlation_id_uuidv4.Middleware())
+	router.Use(gin_correlation_id_shortuuid.Middleware())
 
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			gin_correlation_cors.CorrelationIDHeaderDefault: gin_correlation_id_uuidv4.GetCorrelationID(c),
+			gin_correlation_cors.CorrelationIDHeaderDefault: gin_correlation_id_shortuuid.GetCorrelationID(c),
 		})
 	})
 	return router
 }
 
-func TestPanicSetCorrelationIdUuidV4Key(t *testing.T) {
-	// mock TestPanicSetCorrelationIdUuidV4Key
+func TestPanicSetCorrelationIDShortUuidKey(t *testing.T) {
+	// mock TestPanicSetCorrelationIDShortUuidKey
 
-	errString := "can not SetCorrelationIDUuidV4Key set by empty"
+	errString := "can not SetCorrelationIDShortUuidKey set by empty"
 	if !assert.PanicsWithError(t, errString, func() {
-		// do TestPanicSetCorrelationIdUuidV4Key
-		gin_correlation_cors.SetCorrelationIDUuidV4Key("")
+		// do TestPanicSetCorrelationIDShortUuidKey
+		gin_correlation_cors.SetCorrelationIDShortUuidKey("")
 	}) {
-		// verify TestPanicSetCorrelationIdUuidV4Key
-		t.Fatalf("TestPanicSetCorrelationIdUuidV4Key should panic")
+		// verify TestPanicSetCorrelationIDShortUuidKey
+		t.Fatalf("TestPanicSetCorrelationIDShortUuidKey should panic")
 	}
 }
 
