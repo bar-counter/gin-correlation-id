@@ -58,9 +58,38 @@ $ echo "go mod vendor"
 
 ## Performance
 
+```log
+goos: darwin
+goarch: amd64
+cpu: Intel(R) Core(TM) i9-10910 CPU @ 3.60GHz
+
+pkg: github.com/bar-counter/gin-correlation-id/example/ginid_uuidv4_test
+Benchmark_gin_correlation_id_uuidv4
+Benchmark_gin_correlation_id_uuidv4-20                    244521              4945 ns/op            2323 B/op         32 allocs/op
+BenchmarkParallel_gin_correlation_id_uuidv4
+BenchmarkParallel_gin_correlation_id_uuidv4-20            480244              2454 ns/op            2330 B/op         32 allocs/op
+
+pkg: github.com/bar-counter/gin-correlation-id/example/ginid_snowflake_test
+Benchmark_gin_correlation_id_snowflake
+Benchmark_gin_correlation_id_snowflake-20                 344289              3269 ns/op            2259 B/op         31 allocs/op
+BenchmarkParallel_gin_correlation_id_snowflake
+BenchmarkParallel_gin_correlation_id_snowflake-20         492865              2339 ns/op            2265 B/op         31 allocs/op
+
+pkg: github.com/bar-counter/gin-correlation-id/example/ginid_shortuuid_test
+BenchmarkGinIdShortUuid
+BenchmarkGinIdShortUuid-20                122689              9716 ns/op            4896 B/op        128 allocs/op
+BenchmarkParallelGinIdShortUuid
+BenchmarkParallelGinIdShortUuid-20        272950              4430 ns/op            4914 B/op        128 allocs/op
+```
+
 ## usage
 
-### uuid-v4
+- see full api usage at unit test case
+  - [gin_correlation_id_uuidv4](https://github.com/bar-counter/gin-correlation-id/blob/main/example/ginid_uuidv4_test/ping_test.go)
+  - [gin_correlation_id_snowflake](https://github.com/bar-counter/gin-correlation-id/blob/main/example/ginid_snowflake_test/ping_test.go)
+  - [gin_correlation_id_shortuuid](https://github.com/bar-counter/gin-correlation-id/blob/main/example/ginid_shortuuid_test/ping_test.go)
+
+### sample uuid-v4
 
 ```go
 package main
