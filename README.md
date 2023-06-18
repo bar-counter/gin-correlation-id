@@ -58,36 +58,40 @@ $ echo "go mod vendor"
 
 ## Performance
 
-```log
-goos: darwin
-goarch: amd64
-cpu: Intel(R) Core(TM) i9-10910 CPU @ 3.60GHz
+- Performance log
+  see [PerformanceLog.md](https://github.com/bar-counter/gin-correlation-id/blob/main/doc/PerformanceLog.md)
 
-pkg: github.com/bar-counter/gin-correlation-id/example/ginid_uuidv4_test
-Benchmark_gin_correlation_id_uuidv4
-Benchmark_gin_correlation_id_uuidv4-20                    244521              4945 ns/op            2323 B/op         32 allocs/op
-BenchmarkParallel_gin_correlation_id_uuidv4
-BenchmarkParallel_gin_correlation_id_uuidv4-20            480244              2454 ns/op            2330 B/op         32 allocs/op
+| platform | arch  | method                                            | times  | ns/op       | B/op      | allocs/op     | cpu                                            |
+|:---------|:------|:--------------------------------------------------|:-------|:------------|:----------|:--------------|:-----------------------------------------------|
+| linux    | amd64 | Benchmark_gin_correlation_id_uuidv4-2             | 167029 | 7124 ns/op  | 2320 B/op | 32 allocs/op  | Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz      |
+| linux    | amd64 | BenchmarkParallel_gin_correlation_id_uuidv4-2     | 218067 | 5572 ns/op  | 2320 B/op | 32 allocs/op  | Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz      |
+| linux    | amd64 | BenchmarkParallel_gin_correlation_id_snowflake-2  | 260205 | 4920 ns/op  | 2256 B/op | 31 allocs/op  | Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz      |
+| linux    | amd64 | Benchmark_gin_correlation_id_snowflake-2          | 199422 | 5922 ns/op  | 2256 B/op | 31 allocs/op  | Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz      |
+| linux    | amd64 | BenchmarkGinIdShortUuid-2                         | 73371  | 15670 ns/op | 4891 B/op | 128 allocs/op | Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz      |
+| linux    | amd64 | BenchmarkParallelGinIdShortUuid-2                 | 103296 | 10477 ns/op | 4891 B/op | 128 allocs/op | Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz      |
+| windows  | amd64 | Benchmark_gin_correlation_id_uuidv4-2             | 215640 | 5563 ns/op  | 2344 B/op | 33 allocs/op  | Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz |
+| windows  | amd64 | BenchmarkParallel_gin_correlation_id_uuidv4-2     | 291274 | 3558 ns/op  | 2344 B/op | 33 allocs/op  | Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz |
+| windows  | amd64 | Benchmark_gin_correlation_id_snowflake-2          | 228192 | 5059 ns/op  | 2256 B/op | 31 allocs/op  | Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz |
+| windows  | amd64 | BenchmarkParallel_gin_correlation_id_snowflake-2  | 347394 | 3327 ns/op  | 2256 B/op | 31 allocs/op  | Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz |
+| windows  | amd64 | BenchmarkGinIdShortUuid-2                         | 95556  | 12331 ns/op | 4915 B/op | 129 allocs/op | Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz |
+| windows  | amd64 | BenchmarkParallelGinIdShortUuid-2                 | 153523 | 8331 ns/op  | 4915 B/op | 129 allocs/op | Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz |
+| darwin   | amd64 | Benchmark_gin_correlation_id_uuidv4-2             | 440373 | 2712 ns/op  | 2321 B/op | 32 allocs/op  | apple silicon M1 Max core 10                   |
+| darwin   | amd64 | BenchmarkParallel_gin_correlation_id_uuidv4-10    | 513122 | 2296 ns/op  | 2324 B/op | 32 allocs/op  | apple silicon M1 Max core 10                   |
+| darwin   | amd64 | Benchmark_gin_correlation_id_snowflake-2          | 570752 | 2095 ns/op  | 2257 B/op | 31 allocs/op  | apple silicon M1 Max core 10                   |
+| darwin   | amd64 | BenchmarkParallel_gin_correlation_id_snowflake-10 | 557127 | 2213 ns/op  | 2260 B/op | 31 allocs/op  | apple silicon M1 Max core 10                   |
+| darwin   | amd64 | BenchmarkGinIdShortUuid-2                         | 202786 | 5920 ns/op  | 4893 B/op | 128 allocs/op | apple silicon M1 Max core 10                   |
+| darwin   | amd64 | BenchmarkParallelGinIdShortUuid-10                | 330234 | 3614 ns/op  | 4898 B/op | 128 allocs/op | apple silicon M1 Max core 10                   |
 
-pkg: github.com/bar-counter/gin-correlation-id/example/ginid_snowflake_test
-Benchmark_gin_correlation_id_snowflake
-Benchmark_gin_correlation_id_snowflake-20                 344289              3269 ns/op            2259 B/op         31 allocs/op
-BenchmarkParallel_gin_correlation_id_snowflake
-BenchmarkParallel_gin_correlation_id_snowflake-20         492865              2339 ns/op            2265 B/op         31 allocs/op
-
-pkg: github.com/bar-counter/gin-correlation-id/example/ginid_shortuuid_test
-BenchmarkGinIdShortUuid
-BenchmarkGinIdShortUuid-20                122689              9716 ns/op            4896 B/op        128 allocs/op
-BenchmarkParallelGinIdShortUuid
-BenchmarkParallelGinIdShortUuid-20        272950              4430 ns/op            4914 B/op        128 allocs/op
-```
+- `ns/op` is the average time per operation, lower latency better performance
+- `B/op` is the number of bytes allocated per operation, memory allocation means getting more memory from the operating system, less occupied better
+- `allocs/op` is the number of allocations per operation, memory allocation means getting more memory from the operating system, less occupied better
 
 ## usage
 
 - see full api usage at unit test case
-  - [gin_correlation_id_uuidv4](https://github.com/bar-counter/gin-correlation-id/blob/main/example/ginid_uuidv4_test/ping_test.go)
-  - [gin_correlation_id_snowflake](https://github.com/bar-counter/gin-correlation-id/blob/main/example/ginid_snowflake_test/ping_test.go)
-  - [gin_correlation_id_shortuuid](https://github.com/bar-counter/gin-correlation-id/blob/main/example/ginid_shortuuid_test/ping_test.go)
+    - [gin_correlation_id_uuidv4](https://github.com/bar-counter/gin-correlation-id/blob/main/example/ginid_uuidv4_test/ping_test.go)
+    - [gin_correlation_id_snowflake](https://github.com/bar-counter/gin-correlation-id/blob/main/example/ginid_snowflake_test/ping_test.go)
+    - [gin_correlation_id_shortuuid](https://github.com/bar-counter/gin-correlation-id/blob/main/example/ginid_shortuuid_test/ping_test.go)
 
 ### sample uuid-v4
 
@@ -157,13 +161,13 @@ pong as correlation ID: 0b737fda-5439-487b-9f81-a7824b88532e
 
 ```go
     // use uuid v4
-    gin_correlation_id_uuidv4.GetCorrelationID(*gin.Context)
+gin_correlation_id_uuidv4.GetCorrelationID(*gin.Context)
 
-    // use snowflake
-    gin_correlation_id_snowflake.GetCorrelationID(*gin.Context)
+// use snowflake
+gin_correlation_id_snowflake.GetCorrelationID(*gin.Context)
 
-    // use shortuuid
-    gin_correlation_id_shortuuid.GetCorrelationID(*gin.Context)
+// use shortuuid
+gin_correlation_id_shortuuid.GetCorrelationID(*gin.Context)
 ```
 
 # CORS
