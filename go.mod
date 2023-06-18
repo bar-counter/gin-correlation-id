@@ -3,6 +3,7 @@ module github.com/bar-counter/gin-correlation-id
 go 1.17
 
 require (
+	github.com/bwmarrin/snowflake v0.3.0
 	github.com/gin-gonic/gin v1.9.1
 	github.com/gofrs/uuid/v5 v5.0.0
 	github.com/lithammer/shortuuid/v4 v4.0.0

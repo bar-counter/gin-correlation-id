@@ -33,6 +33,8 @@ jobs:
 
       - name: Run test coverage
         run: go test -cover -coverprofile coverage.txt -covermode count -tags test -coverpkg ./... -v ./...
+        env:
+          GIN_MODE: release
 
       - name: Codecov
         uses: codecov/codecov-action@v3.1.4

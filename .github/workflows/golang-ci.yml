@@ -62,9 +62,15 @@ jobs:
 
       - name: Run test
         run: go test -v ./...
+        env:
+          GIN_MODE: release
 
       - name: Run test benchmark
         run: go test -run none -bench . -benchmem -v ./...
+        env:
+          GIN_MODE: release
 
       - name: Run test coverage
         run: go test -cover -coverprofile coverage.txt -covermode count -tags test -coverpkg ./... -v ./...
+        env:
+          GIN_MODE: release

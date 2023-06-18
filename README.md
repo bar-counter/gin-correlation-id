@@ -41,8 +41,9 @@ $ echo "go mod vendor"
 |:-----------------------------------------|:--------|
 | https://github.com/stretchr/testify      | v1.8.4  |
 | https://github.com/gin-gonic/gin         | v1.9.1  |
-| https://github.com/lithammer/shortuuid/4 | v4.0.0  |
 | https://github.com/gofrs/uuid/v5         | v5.0.0  |
+| https://github.com/bwmarrin/snowflake    | v0.3.0  |
+| https://github.com/lithammer/shortuuid/4 | v4.0.0  |
 
 ## Feature
 

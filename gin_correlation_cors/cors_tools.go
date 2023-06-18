@@ -8,8 +8,9 @@ import (
 
 func AllowCorrelationID(c *gin.Context) {
 	keys := []string{
-		correlationIDShortUuidKey,
 		correlationIDUuidV4Key,
+		correlationIDSnowflakeKey,
+		correlationIDShortUuidKey,
 	}
 	keys = deduplicateStringSlice(keys)
 	keys = removeWhitespaceAsStringSlice(keys)
