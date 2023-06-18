@@ -1,14 +1,19 @@
 [![golang-ci](https://github.com/bar-counter/gin-correlation-id/actions/workflows/golang-ci.yml/badge.svg)](https://github.com/bar-counter/gin-correlation-id/actions/workflows/golang-ci.yml)
+[![license](https://img.shields.io/github/license/bar-counter/gin-correlation-id)](https://github.com/bar-counter/gin-correlation-id)
 [![go mod version](https://img.shields.io/github/go-mod/go-version/bar-counter/gin-correlation-id?label=go.mod)](https://github.com/bar-counter/gin-correlation-id)
 [![GoDoc](https://godoc.org/github.com/bar-counter/gin-correlation-id?status.png)](https://godoc.org/github.com/bar-counter/gin-correlation-id/)
 [![GoReportCard](https://goreportcard.com/badge/github.com/bar-counter/gin-correlation-id)](https://goreportcard.com/report/github.com/bar-counter/gin-correlation-id)
 [![codecov](https://codecov.io/gh/bar-counter/gin-correlation-id/branch/main/graph/badge.svg)](https://codecov.io/gh/bar-counter/gin-correlation-id)
 [![github release](https://img.shields.io/github/v/release/bar-counter/gin-correlation-id?style=social)](https://github.com/bar-counter/gin-correlation-id/releases)
 
-
 ## for what
 
-- this project used to github golang lib project
+Middleware for reading or generating correlation IDs for each incoming request.
+
+Correlation IDs can then be added to your logs, making it simple to retrieve all logs generated from a single HTTP
+request.
+
+The middleware checks for the `x-request-id` header by default, but can be set to any key，like `x-correlation-id`
 
 ## depends
 
@@ -32,17 +37,19 @@ $ echo "go mod vendor"
 
 ### libs
 
-| lib                                 | version |
-|:------------------------------------|:--------|
-| https://github.com/stretchr/testify | v1.8.4  |
-| https://github.com/gin-gonic/gin    | v1.9.1  |
-| https://github.com/gofrs/uuid/v5    | v5.0.0  |
+| lib                                      | version |
+|:-----------------------------------------|:--------|
+| https://github.com/stretchr/testify      | v1.8.4  |
+| https://github.com/gin-gonic/gin         | v1.9.1  |
+| https://github.com/lithammer/shortuuid/4 | v4.0.0  |
+| https://github.com/gofrs/uuid/v5         | v5.0.0  |
 
 ## Feature
 
-- id creation method
-  - [x] uuid-v4 by [https://github.com/gofrs/uuid](https://github.com/gofrs/uuid)
-  - [ ] snowflake
+- id creation support
+    - [x] shortuuid by [https://github.com/lithammer/shortuuid](https://github.com/lithammer/shortuuid)
+    - [x] uuid-v4 by [https://github.com/gofrs/uuid](https://github.com/gofrs/uuid)
+    - [ ] snowflake
 - [CORS](#CORS) cross-origin resource sharing
 
 ## usage
@@ -121,7 +128,8 @@ pong as correlation ID: 0b737fda-5439-487b-9f81-a7824b88532e
 
 If you are using cross-origin resource sharing (CORS)
 
-> e.g. you are making requests to an API from a frontend JavaScript code served from a different origin, you have to ensure two things:
+> e.g. you are making requests to an API from a frontend JavaScript code served from a different origin, you have to
+> ensure two things:
 
 - permit correlation ID header in the incoming requests' HTTP headers so the value can be reused by the middleware,
 - add the correlation ID header to the allowlist in responses' HTTP headers so it can be accessed by the browser.
@@ -129,7 +137,8 @@ If you are using cross-origin resource sharing (CORS)
 have to include the `Access-Control-Allow-Origin` and `Access-Control-Expose-Headers`
 
 - use api will add `Access-Control-Expose-Headers` auto
-- so only add `Access-Control-Allow-Origin` and [https://github.com/gin-contrib/cors](https://github.com/gin-contrib/cors) 
+- so only add `Access-Control-Allow-Origin`
+  and [https://github.com/gin-contrib/cors](https://github.com/gin-contrib/cors)
 
 # dev
 

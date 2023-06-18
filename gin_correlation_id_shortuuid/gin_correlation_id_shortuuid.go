@@ -1,10 +1,10 @@
-package gin_correlation_id_uuidv4
+package gin_correlation_id_shortuuid
 
 import (
-	"fmt"
 	"github.com/bar-counter/gin-correlation-id/gin_correlation_cors"
 	"github.com/gin-gonic/gin"
-	"github.com/gofrs/uuid/v5"
+	"github.com/lithammer/shortuuid/v4"
+	_ "github.com/lithammer/shortuuid/v4"
 	"strings"
 )
 
@@ -24,15 +24,10 @@ func addCorrelationID(c *gin.Context) {
 		gin_correlation_cors.AllowCorrelationID(c)
 	}
 
-	uuidKey := gin_correlation_cors.GetCorrelationIDUuidV4Key()
-
+	uuidKey := gin_correlation_cors.GetCorrelationIDShortUuidKey()
 	correlationID := c.Request.Header.Get(uuidKey)
 	if strings.TrimSpace(correlationID) == "" {
-		key, err := uuid.NewV4()
-		if err != nil {
-			panic(fmt.Errorf("can not generate uuid v4: %w", err))
-		}
-		id := key.String()
+		id := shortuuid.New()
 		c.Request.Header.Add(uuidKey, id)
 		c.Header(uuidKey, id)
 	}
@@ -42,5 +37,5 @@ func addCorrelationID(c *gin.Context) {
 // GetCorrelationID
 // can get uuid from gin.Context
 func GetCorrelationID(c *gin.Context) string {
-	return c.Request.Header.Get(gin_correlation_cors.GetCorrelationIDUuidV4Key())
+	return c.Request.Header.Get(gin_correlation_cors.GetCorrelationIDShortUuidKey())
 }
