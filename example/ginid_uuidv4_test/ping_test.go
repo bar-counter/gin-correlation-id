@@ -33,15 +33,15 @@ func ginPingJsonRouter(correlationKey string, isSupportCorsHeader bool) *gin.Eng
 	return router
 }
 
-func TestPanicSetCorrelationIdUuidV4Key(t *testing.T) {
-	// mock TestPanicSetCorrelationIdUuidV4Key
+func TestPanicSetCorrelationIDUuidV4Key(t *testing.T) {
+	// mock TestPanicSetCorrelationIDUuidV4Key
 
 	errString := "can not SetCorrelationIDUuidV4Key set by empty"
 	if !assert.PanicsWithError(t, errString, func() {
-		// do TestPanicSetCorrelationIdUuidV4Key
+		// do TestPanicSetCorrelationIDUuidV4Key
 		gin_correlation_cors.SetCorrelationIDUuidV4Key("")
 	}) {
-		// verify TestPanicSetCorrelationIdUuidV4Key
+		// verify TestPanicSetCorrelationIDUuidV4Key
 		t.Fatalf("TestPanicSetCorrelationIdUuidV4Key should panic")
 	}
 }

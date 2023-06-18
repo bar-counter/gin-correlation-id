@@ -48,10 +48,15 @@ $ echo "go mod vendor"
 ## Feature
 
 - id creation support
+    - [x] uuid v4 by [https://github.com/gofrs/uuid](https://github.com/gofrs/uuid)
+    - [x] snowflake [https://github.com/bwmarrin/snowflake](https://github.com/bwmarrin/snowflake)
     - [x] shortuuid by [https://github.com/lithammer/shortuuid](https://github.com/lithammer/shortuuid)
-    - [x] uuid-v4 by [https://github.com/gofrs/uuid](https://github.com/gofrs/uuid)
-    - [ ] snowflake
-- [CORS](#CORS) cross-origin resource sharing
+- [x] change CorrelationID Header key at each support
+- [X] [CORS](#CORS) cross-origin resource sharing
+- [X] more perfect test case coverage
+- [X] more perfect benchmark case
+
+## Performance
 
 ## usage
 
@@ -93,7 +98,7 @@ func main() {
 }
 ```
 
-### integrationTest
+## integrationTest
 
 - run server then test as curl
 
@@ -122,7 +127,14 @@ pong as correlation ID: 0b737fda-5439-487b-9f81-a7824b88532e
 2. can get `correlation ID` as
 
 ```go
+    // use uuid v4
     gin_correlation_id_uuidv4.GetCorrelationID(*gin.Context)
+
+    // use snowflake
+    gin_correlation_id_snowflake.GetCorrelationID(*gin.Context)
+
+    // use shortuuid
+    gin_correlation_id_shortuuid.GetCorrelationID(*gin.Context)
 ```
 
 # CORS
@@ -137,13 +149,14 @@ If you are using cross-origin resource sharing (CORS)
 
 have to include the `Access-Control-Allow-Origin` and `Access-Control-Expose-Headers`
 
-- use api will add `Access-Control-Expose-Headers` auto
+- use this lib will add `Access-Control-Expose-Headers` auto by middleware
 - so only add `Access-Control-Allow-Origin`
-  and [https://github.com/gin-contrib/cors](https://github.com/gin-contrib/cors)
+  like use this lib [https://github.com/gin-contrib/cors](https://github.com/gin-contrib/cors)
 
 # dev
 
 ```bash
+# It needs to be executed after the first use or update of dependencies.
 $ make init dep
 ```
 
@@ -156,16 +169,17 @@ $ make test testBenchmark
 add main.go file and run
 
 ```bash
-# run at env dev
+# run at env dev use cmd/main.go
 $ make dev
-
-# run at env ordinary
-$ make run
 ```
 
 - ci to fast check
 
 ```bash
+# check style at local
+$ make style
+
+# run ci at local
 $ make ci
 ```
 
@@ -180,9 +194,3 @@ $ make dockerTestPruneLatest
 # more info see
 $ make helpDocker
 ```
-
-## use
-
-- use to replace
-  `bar-counter/gin-correlation-id` to you code
-

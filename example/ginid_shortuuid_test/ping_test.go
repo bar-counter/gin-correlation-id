@@ -87,16 +87,16 @@ func TestTestCloseCors(t *testing.T) {
 	assert.Equal(t, "", w.Header().Get(gin_correlation_cors.HeaderAccessControlExposeHeaders))
 }
 
-func TestSetCorrelationIDUuidV4Key(t *testing.T) {
-	// mock SetCorrelationIDUuidV4Key
-	t.Logf("~> mock SetCorrelationIDUuidV4Key")
+func TestSetCorrelationIDShortUuidKey(t *testing.T) {
+	// mock SetCorrelationIDShortUuidKey
+	t.Logf("~> mock SetCorrelationIDShortUuidKey")
 	router := ginPingJsonRouter(gin_correlation_cors.KeyCorrelationIDHeaderId, true)
-	// do SetCorrelationIDUuidV4Key
-	t.Logf("~> do SetCorrelationIDUuidV4Key")
+	// do SetCorrelationIDShortUuidKey
+	t.Logf("~> do SetCorrelationIDShortUuidKey")
 	w := performRequest(router, "GET", "/ping")
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.NotNil(t, w.Header().Get(gin_correlation_cors.KeyCorrelationIDHeaderId))
-	// verify SetCorrelationIDUuidV4Key
+	// verify SetCorrelationIDShortUuidKey
 	assert.Equal(t, fmt.Sprintf("%s, %s",
 		gin_correlation_cors.KeyCorrelationIDHeaderId, gin_correlation_cors.CorrelationIDHeaderDefault),
 		w.Header().Get(gin_correlation_cors.HeaderAccessControlExposeHeaders))

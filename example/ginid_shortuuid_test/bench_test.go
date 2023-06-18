@@ -14,6 +14,7 @@ func ginPingRouter() *gin.Engine {
 	router := gin.New()
 
 	gin_correlation_cors.SetIsSupportCorsHeader(true)
+	gin_correlation_cors.SetCorrelationIDShortUuidKey(gin_correlation_cors.CorrelationIDHeaderDefault)
 	router.Use(gin_correlation_id_shortuuid.Middleware())
 
 	router.GET("/ping", func(c *gin.Context) {
