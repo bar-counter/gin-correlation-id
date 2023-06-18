@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/gin-gonic/gin v1.9.1
-	github.com/satori/go.uuid v1.2.0
+	github.com/gofrs/uuid/v5 v5.0.0
 	github.com/stretchr/testify v1.8.4
 )
 

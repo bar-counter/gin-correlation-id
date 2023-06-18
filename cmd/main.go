@@ -6,7 +6,7 @@ import (
 	_ "embed"
 	"flag"
 	"fmt"
-	"github.com/bar-counter/gin-correlation-id/ginid_uuidv4"
+	"github.com/bar-counter/gin-correlation-id/gin_correlation_id_uuidv4"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -27,7 +27,7 @@ func main() {
 	g := gin.New()
 
 	middlewareList := []gin.HandlerFunc{
-		ginid_uuidv4.CorrelationIDUUidV4Middleware(),
+		gin_correlation_id_uuidv4.Middleware(),
 	}
 	// Routes.
 	Load(
@@ -61,7 +61,7 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 }
 
 func ping(c *gin.Context) {
-	c.String(http.StatusOK, "pong as correlation ID %s", ginid_uuidv4.GetCorrelationIDUUidV4(c))
+	c.String(http.StatusOK, "pong as correlation ID: %s", gin_correlation_id_uuidv4.GetCorrelationID(c))
 }
 
 // Options is a middleware function that appends headers

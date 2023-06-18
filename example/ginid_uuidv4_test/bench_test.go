@@ -1,7 +1,7 @@
 package ginid_uuidv4_test
 
 import (
-	"github.com/bar-counter/gin-correlation-id/ginid_uuidv4"
+	"github.com/bar-counter/gin-correlation-id/gin_correlation_id_uuidv4"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 	"net/http"
@@ -11,7 +11,7 @@ import (
 func ginPingRouter() *gin.Engine {
 	router := gin.New()
 
-	router.Use(ginid_uuidv4.CorrelationIDUUidV4Middleware())
+	router.Use(gin_correlation_id_uuidv4.Middleware())
 
 	router.GET("/ping", func(c *gin.Context) {
 		c.String(http.StatusOK, "pong")
@@ -29,7 +29,7 @@ func BenchmarkGinIdUUuidV4(b *testing.B) {
 		w := performRequest(router, "GET", "/ping")
 		// verify GinIdUUidV4
 		assert.Equal(b, http.StatusOK, w.Code)
-		assert.NotNilf(b, w.Header().Get(ginid_uuidv4.CorrelationIDUUidV4HeaderDefault), "want header [ %v ] not empty", ginid_uuidv4.CorrelationIDUUidV4HeaderDefault)
+		assert.NotNilf(b, w.Header().Get(gin_correlation_id_uuidv4.CorrelationIDHeaderDefault), "want header [ %v ] not empty", gin_correlation_id_uuidv4.CorrelationIDHeaderDefault)
 	}
 	b.StopTimer()
 }
@@ -45,7 +45,7 @@ func BenchmarkParallelGinIdUuidV4(b *testing.B) {
 			w := performRequest(router, "GET", "/ping")
 			// verify GinIdUUidV4
 			assert.Equal(b, http.StatusOK, w.Code)
-			assert.NotNilf(b, w.Header().Get(ginid_uuidv4.CorrelationIDUUidV4HeaderDefault), "want header [ %v ] not empty", ginid_uuidv4.CorrelationIDUUidV4HeaderDefault)
+			assert.NotNilf(b, w.Header().Get(gin_correlation_id_uuidv4.CorrelationIDHeaderDefault), "want header [ %v ] not empty", gin_correlation_id_uuidv4.CorrelationIDHeaderDefault)
 		}
 	})
 	b.StopTimer()

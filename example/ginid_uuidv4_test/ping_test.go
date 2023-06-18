@@ -2,7 +2,7 @@ package ginid_uuidv4_test
 
 import (
 	"encoding/json"
-	"github.com/bar-counter/gin-correlation-id/ginid_uuidv4"
+	"github.com/bar-counter/gin-correlation-id/gin_correlation_id_uuidv4"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 	"net/http"
@@ -18,13 +18,13 @@ func performRequest(r http.Handler, method, path string) *httptest.ResponseRecor
 }
 
 func ginPingJsonRouter() *gin.Engine {
-	ginid_uuidv4.SetCorrelationIDUUidV4Key(ginid_uuidv4.CorrelationIDUUidV4HeaderDefault)
+	gin_correlation_id_uuidv4.SetCorrelationIDUuidV4Key(gin_correlation_id_uuidv4.CorrelationIDHeaderDefault)
 	router := gin.New()
-	router.Use(ginid_uuidv4.CorrelationIDUUidV4Middleware())
+	router.Use(gin_correlation_id_uuidv4.Middleware())
 
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			ginid_uuidv4.CorrelationIDUUidV4HeaderDefault: ginid_uuidv4.GetCorrelationIDUUidV4(c),
+			gin_correlation_id_uuidv4.CorrelationIDHeaderDefault: gin_correlation_id_uuidv4.GetCorrelationID(c),
 		})
 	})
 	return router
@@ -46,8 +46,23 @@ func TestPingOnce(t *testing.T) {
 
 	assert.Nil(t, err)
 
-	value, exists := response[ginid_uuidv4.CorrelationIDUUidV4HeaderDefault]
+	value, exists := response[gin_correlation_id_uuidv4.CorrelationIDHeaderDefault]
+
+	t.Logf("~> verify PingOnce %s", value)
 
 	assert.True(t, exists)
 	assert.NotNil(t, value)
+}
+
+func TestPanicSetCorrelationIdUuidV4Key(t *testing.T) {
+	// mock TestPanicSetCorrelationIdUuidV4Key
+
+	errString := "can not SetCorrelationIDUuidV4Key set by empty"
+	if !assert.PanicsWithError(t, errString, func() {
+		// do TestPanicSetCorrelationIdUuidV4Key
+		gin_correlation_id_uuidv4.SetCorrelationIDUuidV4Key("")
+	}) {
+		// verify TestPanicSetCorrelationIdUuidV4Key
+		t.Fatalf("TestPanicSetCorrelationIdUuidV4Key should panic")
+	}
 }
