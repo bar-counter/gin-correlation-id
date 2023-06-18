@@ -156,6 +156,7 @@ func TestSetSnowflakeModeBase58(t *testing.T) {
 	t.Logf("~> mock SetSnowflakeModeBase58")
 	// mock SetSnowflakeModeBase58
 	router := ginPingRouter(gin_correlation_id_snowflake.SnowflakeModeBase58)
+
 	t.Logf("~> do SetSnowflakeModeBase58")
 	// do SetSnowflakeModeBase58
 	w := performRequest(router, "GET", "/ping")
@@ -166,4 +167,94 @@ func TestSetSnowflakeModeBase58(t *testing.T) {
 	t.Logf("~> verify SetSnowflakeModeBase58 [ %s ]", content)
 	assert.Equal(t, 35,
 		len(content))
+}
+
+func TestSetSnowflakeModeBase36(t *testing.T) {
+	t.Logf("~> mock SetSnowflakeModeBase36")
+	// mock SetSnowflakeModeBase36
+	router := ginPingRouter(gin_correlation_id_snowflake.SnowflakeModeBase36)
+
+	t.Logf("~> do SetSnowflakeModeBase36")
+	// do SetSnowflakeModeBase36
+	w := performRequest(router, "GET", "/ping")
+
+	// verify SetSnowflakeModeBase36
+	assert.Equal(t, http.StatusOK, w.Code)
+	assert.NotNilf(t, w.Header().Get(gin_correlation_cors.CorrelationIDHeaderDefault), "want header [ %v ] not empty", gin_correlation_cors.CorrelationIDHeaderDefault)
+	content := w.Body.String()
+	t.Logf("~> verify SetSnowflakeModeBase36 [ %s ]", content)
+	assert.Equal(t, 36,
+		len(content))
+}
+
+func TestSetSnowflakeModeBase32(t *testing.T) {
+	t.Logf("~> mock SetSnowflakeModeBase32")
+	// mock SetSnowflakeModeBase32
+	router := ginPingRouter(gin_correlation_id_snowflake.SnowflakeModeBase32)
+
+	t.Logf("~> do SetSnowflakeModeBase32")
+	// do SetSnowflakeModeBase32
+	w := performRequest(router, "GET", "/ping")
+
+	// verify SetSnowflakeModeBase32
+	assert.Equal(t, http.StatusOK, w.Code)
+	assert.NotNilf(t, w.Header().Get(gin_correlation_cors.CorrelationIDHeaderDefault), "want header [ %v ] not empty", gin_correlation_cors.CorrelationIDHeaderDefault)
+	content := w.Body.String()
+	t.Logf("~> verify SetSnowflakeModeBase32 [ %s ]", content)
+	assert.Equal(t, 37,
+		len(content))
+}
+
+func TestSetSnowflakeModeBase2(t *testing.T) {
+	t.Logf("~> mock SetSnowflakeModeBase2")
+	// mock SetSnowflakeModeBase2
+	router := ginPingRouter(gin_correlation_id_snowflake.SnowflakeModeBase2)
+
+	t.Logf("~> do SetSnowflakeModeBase2")
+	// do SetSnowflakeModeBase2
+	w := performRequest(router, "GET", "/ping")
+
+	// verify SetSnowflakeModeBase2
+	assert.Equal(t, http.StatusOK, w.Code)
+	assert.NotNilf(t, w.Header().Get(gin_correlation_cors.CorrelationIDHeaderDefault), "want header [ %v ] not empty", gin_correlation_cors.CorrelationIDHeaderDefault)
+	content := w.Body.String()
+	t.Logf("~> verify SetSnowflakeModeBase2 [ %s ]", content)
+	assert.Equal(t, 85,
+		len(content))
+}
+
+func TestSetSnowflakeModeBase64(t *testing.T) {
+	t.Logf("~> mock SetSnowflakeModeBase64")
+	// mock SetSnowflakeModeBase64
+	router := ginPingRouter(gin_correlation_id_snowflake.SnowflakeModeBase64)
+
+	t.Logf("~> do SetSnowflakeModeBase64")
+	// do SetSnowflakeModeBase64
+	w := performRequest(router, "GET", "/ping")
+
+	// verify SetSnowflakeModeBase64
+	assert.Equal(t, http.StatusOK, w.Code)
+	assert.NotNilf(t, w.Header().Get(gin_correlation_cors.CorrelationIDHeaderDefault), "want header [ %v ] not empty", gin_correlation_cors.CorrelationIDHeaderDefault)
+	content := w.Body.String()
+	t.Logf("~> verify SetSnowflakeModeBase64 [ %s ]", content)
+	assert.NotEqual(t, "",
+		content)
+}
+
+func TestSetSnowflakeModeInt64(t *testing.T) {
+	t.Logf("~> mock SetSnowflakeModeInt64")
+	// mock SetSnowflakeModeInt64
+	router := ginPingRouter(gin_correlation_id_snowflake.SnowflakeModeInt64)
+
+	t.Logf("~> do SetSnowflakeModeInt64")
+	// do SetSnowflakeModeInt64
+	w := performRequest(router, "GET", "/ping")
+
+	// verify SetSnowflakeModeInt64
+	assert.Equal(t, http.StatusOK, w.Code)
+	assert.NotNilf(t, w.Header().Get(gin_correlation_cors.CorrelationIDHeaderDefault), "want header [ %v ] not empty", gin_correlation_cors.CorrelationIDHeaderDefault)
+	content := w.Body.String()
+	t.Logf("~> verify SetSnowflakeModeInt64 [ %s ]", content)
+	assert.NotEqual(t, "",
+		content)
 }
