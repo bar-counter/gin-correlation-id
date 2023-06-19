@@ -18,7 +18,7 @@ INFO_TEST_BUILD_DOCKER_FILE=Dockerfile.s6
 ## MakeDocker.mk settings end
 
 ## run info start
-ENV_RUN_INFO_HELP_ARGS= -h
+ENV_RUN_INFO_HELP_ARGS=-h
 ENV_RUN_INFO_ARGS=
 ## run info end
 
@@ -42,7 +42,7 @@ ENV_ROOT_CHANGELOG_PATH?=CHANGELOG.md
 ## go test MakeGoTest.mk start
 # ignore used not matching mode
 # set ignore of test case like grep -v -E "vendor|go_fatal_error" to ignore vendor and go_fatal_error package
-ENV_ROOT_TEST_INVERT_MATCH?="vendor|go_fatal_error|robotn|shirou|go_robot"
+ENV_ROOT_TEST_INVERT_MATCH?="vendor|go_fatal_error|robotn|shirou"
 ifeq ($(OS),Windows_NT)
 ENV_ROOT_TEST_LIST?=./...
 else
@@ -54,6 +54,7 @@ ENV_ROOT_TEST_MAX_TIME:=1m
 
 include z-MakefileUtils/MakeBasicEnv.mk
 include z-MakefileUtils/MakeDistTools.mk
+include z-MakefileUtils/MakeGoList.mk
 include z-MakefileUtils/MakeGoMod.mk
 include z-MakefileUtils/MakeGoTest.mk
 include z-MakefileUtils/MakeGoDist.mk
@@ -150,7 +151,20 @@ cloc:
 
 helpProjectRoot:
 	@echo "Help: Project root Makefile"
-	@echo "-- now build name: ${ROOT_NAME} version: ${ENV_DIST_VERSION}"
+ifeq ($(OS),Windows_NT)
+	@echo ""
+	@echo "warning: other install make cli tools has bug, please use: scoop install main/make"
+	@echo " run will at make tools version 4.+"
+	@echo "windows use this kit must install tools blow:"
+	@echo ""
+	@echo "https://scoop.sh/#/apps?q=busybox&s=0&d=1&o=true"
+	@echo "-> scoop install main/busybox"
+	@echo "and"
+	@echo "https://scoop.sh/#/apps?q=shasum&s=0&d=1&o=true"
+	@echo "-> scoop install main/shasum"
+	@echo ""
+endif
+	@echo "-- now build name: ${ROOT_NAME} --"
 	@echo "-- distTestOS or distReleaseOS will out abi as: ${ENV_DIST_GO_OS} ${ENV_DIST_GO_ARCH} --"
 	@echo ""
 	@echo "~> make env                 - print env of this project"
@@ -165,6 +179,6 @@ helpProjectRoot:
 	@echo "~> make style               - run local code fmt and style check"
 	@echo "~> make dev                 - run as develop mode"
 
-help: helpGoMod helperGoTest helpDocker helpDist helpProjectRoot
+help: helpGoMod helpGoTest helpDocker helpDist helpProjectRoot
 	@echo ""
-	@echo "-- more info see Makefile include: MakeGoMod.mk MakeGoTest.mk MakeGoDist.mk MakeDockerRun.mk --"
+	@echo "-- more info see Makefile include: MakeGoMod.mk MakeGoTest.mk MakeGoDist.mk MakeDocker.mk --"

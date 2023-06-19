@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         go:
-          - '^1.17'
+          - '^1.18'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -42,7 +42,7 @@ jobs:
         run: go build -v ./...
 
       - name: Run test coverage
-        run: go test -cover -coverprofile coverage.txt -covermode count -tags test -coverpkg ./... -v ./...
+        run: go test -cover -coverprofile coverage.txt -covermode count -coverpkg ./... -tags test -v ./...
 
       - name: Codecov
         uses: codecov/codecov-action@v3.1.4
