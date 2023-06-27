@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/bar-counter/gin-correlation-id/compare/v1.1.0...v1.2.0) (2023-06-27)
+
+
+### ✨ Features
+
+* move example test case to example_test and update build kit ([44685b8](https://github.com/bar-counter/gin-correlation-id/commit/44685b83863fd22e54d6349f4096a9175c5fb209))
+
 ## [1.1.0](https://github.com/bar-counter/gin-correlation-id/compare/v1.0.0...v1.1.0) (2023-06-18)
 
 
