@@ -57,6 +57,7 @@ include z-MakefileUtils/MakeDistTools.mk
 include z-MakefileUtils/MakeGoList.mk
 include z-MakefileUtils/MakeGoMod.mk
 include z-MakefileUtils/MakeGoTest.mk
+include z-MakefileUtils/MakeGoTestIntegration.mk
 include z-MakefileUtils/MakeGoDist.mk
 # include MakeDockerRun.mk for docker run
 include z-MakefileUtils/MakeDocker.mk
@@ -87,16 +88,18 @@ endif
 	@echo "== project env info end =="
 
 cleanBuild:
-	-@$(RM) -r ${ENV_ROOT_BUILD_PATH}
+	@$(RM) -r ${ENV_ROOT_BUILD_PATH}
 	@echo "~> finish clean path: ${ENV_ROOT_BUILD_PATH}"
 
 cleanLog:
-	-@$(RM) -r ${ENV_ROOT_LOG_PATH}
+	@$(RM) -r ${ENV_ROOT_LOG_PATH}
 	@echo "~> finish clean path: ${ENV_ROOT_LOG_PATH}"
 
 cleanTestData:
 	$(info -> notes: remove folder [ testdata ] unable to match subdirectories)
 	@$(RM) coverage.txt
+	@$(RM) coverage.out
+	@$(RM) profile.txt
 	@$(RM) -r **/testdata
 	@$(RM) -r **/**/testdata
 	@$(RM) -r **/**/**/testdata
@@ -179,6 +182,6 @@ endif
 	@echo "~> make style               - run local code fmt and style check"
 	@echo "~> make dev                 - run as develop mode"
 
-help: helpGoMod helpGoTest helpDocker helpDist helpProjectRoot
+help: helpGoMod helpGoTest helpDocker helpGoDist helpProjectRoot
 	@echo ""
-	@echo "-- more info see Makefile include: MakeGoMod.mk MakeGoTest.mk MakeGoDist.mk MakeDocker.mk --"
+	@echo "-- more info see Makefile include: MakeGoMod.mk MakeGoTest.mk MakeGoTestIntegration.mk MakeGoDist.mk MakeDocker.mk --"
