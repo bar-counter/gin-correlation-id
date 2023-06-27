@@ -40,7 +40,7 @@ $ echo "go mod edit -require=$(go list -mod=readonly -m -versions github.com/bar
 $ echo "go mod vendor"
 ```
 
-## evn
+## env
 
 - minimum go version: go 1.18
 - change `go 1.18`, `^1.18`, `1.18.10` to new go version
