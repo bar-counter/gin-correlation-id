@@ -15,6 +15,15 @@ request.
 
 The middleware checks for the `x-request-id` header by default, but can be set to any key，like `x-correlation-id`
 
+## Contributing
+
+[![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-v1.4-ff69b4.svg)](.github/CONTRIBUTING_DOC/CODE_OF_CONDUCT.md)
+[![GitHub contributors](https://img.shields.io/github/contributors/bar-counter/gin-correlation-id)](https://github.com/bar-counter/gin-correlation-id/graphs/contributors)
+
+We welcome community contributions to this project.
+
+Please read [Contributor Guide](.github/CONTRIBUTING_DOC/CONTRIBUTING.md) for more information on how to get started.
+
 ## depends
 
 in go mod project
@@ -34,6 +43,7 @@ $ echo "go mod vendor"
 ## evn
 
 - minimum go version: go 1.18
+- change `go 1.18`, `^1.18`, `1.18.10` to new go version
 
 ### libs
 
@@ -92,6 +102,7 @@ $ echo "go mod vendor"
     - [gin_correlation_id_uuidv4](https://github.com/bar-counter/gin-correlation-id/blob/main/example/ginid_uuidv4_test/ping_test.go)
     - [gin_correlation_id_snowflake](https://github.com/bar-counter/gin-correlation-id/blob/main/example/ginid_snowflake_test/ping_test.go)
     - [gin_correlation_id_shortuuid](https://github.com/bar-counter/gin-correlation-id/blob/main/example/ginid_shortuuid_test/ping_test.go)
+    - `go 1.18`, `^1.18`, `1.18.10` to new go version for dev
 
 ### sample uuid-v4
 

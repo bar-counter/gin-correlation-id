@@ -7,7 +7,7 @@ ENV_DIST_MARK=
 ROOT_NAME?=gin-correlation-id
 
 ## MakeDocker.mk settings start
-ROOT_OWNER?=bridgewwater
+ROOT_OWNER?=bar-counter
 ROOT_PARENT_SWITCH_TAG=1.18.10-buster
 # for image local build
 INFO_TEST_BUILD_DOCKER_PARENT_IMAGE=golang
